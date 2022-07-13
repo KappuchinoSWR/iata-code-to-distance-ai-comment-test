@@ -1,4 +1,4 @@
-Calculate flight distance (using Vincenty's formulae) and classify flight in short/middle/long (according to [this classification](https://soep-online.de/wp-content/uploads/2022/05/VO-EG-Nr.-2612004.pdf)).
+Calculate flight distance (using [Vincenty's formulae](https://en.wikipedia.org/wiki/Vincenty%27s_formulae)) and classify flight in short/middle/long (according to [this classification](https://soep-online.de/wp-content/uploads/2022/05/VO-EG-Nr.-2612004.pdf)).
 
 # Install
 
