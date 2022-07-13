@@ -44,3 +44,8 @@ This expects *in.json* having at least this structure and these properties:
     },...
  ]
 ```
+
+# data/airports.json
+
+The data in `airports.json` is public domain. Nearly all airports came from [here](https://github.com/davidmegginson/ourairports-data).
+This dataset doesn't cover all airports with IATA codes. According to IATA there are about 11k airports with IATA codes. *airports.json* has about 9.5k of them.
