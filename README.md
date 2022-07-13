@@ -5,7 +5,7 @@ Calculate flight distance (using Vincenty's formulae) and classify flight in sho
 1. Clone or download repo
 2. Cd into repo
 3. `pip install .`
-4. try it `flight-distance --help"
+4. try it: `flight-distance --help`
 
 
 # Use
