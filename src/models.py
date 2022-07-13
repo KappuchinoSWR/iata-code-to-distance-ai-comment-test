@@ -1,16 +1,22 @@
 import enum
 import re
-from typing import Tuple, Optional
+from typing import Tuple, Optional, List
 
-from pydantic import BaseModel, ConstrainedStr, validator, PositiveInt, ConstrainedList
+from pydantic import BaseModel, validator, ConstrainedList, ConstrainedStr, PositiveInt
 
 from .consts import MAX_MIDDLE_FLIGHT, MAX_SHORT_FLIGHT
+
+
+# Flight type
 
 
 class FlightType(str, enum.Enum):
     SHORT = "short"
     MIDDLE = "middle"
     LONG = "long"
+
+
+# Airport models
 
 
 class IsoCountry(ConstrainedStr):
@@ -59,6 +65,9 @@ class Flight(ConstrainedList):
     max_items = 2
 
 
+# Output model
+
+
 class ClassifiedFlight(BaseModel):
     departure: IataCode
     arrival: IataCode
@@ -73,3 +82,29 @@ class ClassifiedFlight(BaseModel):
         if attr_distance <= MAX_MIDDLE_FLIGHT:
             return FlightType.MIDDLE
         return FlightType.LONG
+
+
+# Batch input/output models
+
+
+class ReadAirport(BaseModel):
+    iata: IataCode
+
+    class Config:
+        frozen = True
+
+
+class ReadFlight(BaseModel):
+    departure: ReadAirport
+    arrival: ReadAirport
+
+    class Config:
+        frozen = True
+
+
+class ReadFlights(BaseModel):
+    __root__: List[ReadFlight]
+
+
+class ClassifiedFlights(BaseModel):
+    __root__: List[ClassifiedFlight]
