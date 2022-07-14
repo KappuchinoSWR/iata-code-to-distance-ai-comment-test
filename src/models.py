@@ -89,7 +89,9 @@ class Flight(ConstrainedList):
 
 class ClassifiedFlight(BaseModel):
     departure: IataCode
+    departure_country: IsoCountry
     arrival: IataCode
+    arrival_country: IsoCountry
     distance: PositiveInt  # in kilometres
     type: Optional[FlightType] = None
 
@@ -101,6 +103,19 @@ class ClassifiedFlight(BaseModel):
         if attr_distance <= MAX_MIDDLE_FLIGHT:
             return FlightType.MIDDLE
         return FlightType.LONG
+
+    @classmethod
+    def from_flight(cls, flight: Flight, distance: PositiveInt) -> "ClassifiedFlight":
+        departure = flight[0]
+        arrival = flight[1]
+
+        return cls(
+            departure=departure.code,
+            arrival=arrival.code,
+            departure_country=departure.country,
+            arrival_country=arrival.country,
+            distance=distance,
+        )
 
 
 # Batch input/output models
