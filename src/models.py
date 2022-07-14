@@ -7,6 +7,15 @@ from pydantic import BaseModel, validator, ConstrainedList, ConstrainedStr, Posi
 from .consts import MAX_MIDDLE_FLIGHT, MAX_SHORT_FLIGHT
 
 
+# Validators
+
+
+def to_upper(cls, value) -> str:
+    if isinstance(value, str):
+        return value.upper()
+    return value
+
+
 # Flight type
 
 
@@ -23,6 +32,11 @@ class IsoCountry(ConstrainedStr):
     min_length = 2
     max_length = 2
     regex = re.compile(r"^[a-zA-Z]+$")
+
+    @classmethod
+    def __get_validators__(cls):
+        yield from super().__get_validators__()
+        yield to_upper
 
 
 class Coordinate(BaseModel):
@@ -50,6 +64,11 @@ class IataCode(ConstrainedStr):
     max_length = 3
     regex = re.compile(r"^[a-zA-Z-0-9]+$")
     strict = True
+
+    @classmethod
+    def __get_validators__(cls):
+        yield from super().__get_validators__()
+        yield to_upper
 
 
 class Airport(BaseModel):
