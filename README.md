@@ -1,4 +1,4 @@
-Calculate flight distance (using [Vincenty's formulae](https://en.wikipedia.org/wiki/Vincenty%27s_formulae)) and classify flight in short/middle/long (according to [this classification](https://soep-online.de/wp-content/uploads/2022/05/VO-EG-Nr.-2612004.pdf)).
+Calculate flight distance (using Vincenty's formulae) and classify flight in short/middle/long (according to [this classification](https://soep-online.de/wp-content/uploads/2022/05/VO-EG-Nr.-2612004.pdf)).
 
 # Install
 
@@ -133,10 +133,12 @@ Cf. `flight-distance schemas`
 
 ```json
 {
-    "departure": "str",
-    "arrival": "chq",
-    "distance": 1906,
-    "type": "middle"
+    "departure": "FRA",
+    "departure_country": "DE",
+    "arrival": "ABC",
+    "arrival_country": "ES",
+    "distance": 1481,
+    "type": "short"
 }
 ```
 
@@ -154,11 +156,25 @@ Cf. `flight-distance schemas`
             "pattern": "^[a-zA-Z-0-9]+$",
             "type": "string"
         },
+        "departure_country": {
+            "title": "Departure Country",
+            "minLength": 2,
+            "maxLength": 2,
+            "pattern": "^[a-zA-Z]+$",
+            "type": "string"
+        },
         "arrival": {
             "title": "Arrival",
             "minLength": 3,
             "maxLength": 3,
             "pattern": "^[a-zA-Z-0-9]+$",
+            "type": "string"
+        },
+        "arrival_country": {
+            "title": "Arrival Country",
+            "minLength": 2,
+            "maxLength": 2,
+            "pattern": "^[a-zA-Z]+$",
             "type": "string"
         },
         "distance": {
@@ -170,7 +186,13 @@ Cf. `flight-distance schemas`
             "$ref": "#/definitions/FlightType"
         }
     },
-    "required": ["departure", "arrival", "distance"],
+    "required": [
+        "departure",
+        "departure_country",
+        "arrival",
+        "arrival_country",
+        "distance"
+    ],
     "definitions": {
         "FlightType": {
             "title": "FlightType",
@@ -189,8 +211,10 @@ Cf. `flight-distance schemas`
 ```json
 [
     {
-        "departure": "str",
-        "arrival": "chq",
+        "departure": "STR",
+        "departure_country": "DE",
+        "arrival": "CHQ",
+        "arrival_country": "GR",
         "distance": 1906,
         "type": "middle"
     }
@@ -224,11 +248,25 @@ Cf. `flight-distance schemas`
                     "pattern": "^[a-zA-Z-0-9]+$",
                     "type": "string"
                 },
+                "departure_country": {
+                    "title": "Departure Country",
+                    "minLength": 2,
+                    "maxLength": 2,
+                    "pattern": "^[a-zA-Z]+$",
+                    "type": "string"
+                },
                 "arrival": {
                     "title": "Arrival",
                     "minLength": 3,
                     "maxLength": 3,
                     "pattern": "^[a-zA-Z-0-9]+$",
+                    "type": "string"
+                },
+                "arrival_country": {
+                    "title": "Arrival Country",
+                    "minLength": 2,
+                    "maxLength": 2,
+                    "pattern": "^[a-zA-Z]+$",
                     "type": "string"
                 },
                 "distance": {
@@ -240,7 +278,13 @@ Cf. `flight-distance schemas`
                     "$ref": "#/definitions/FlightType"
                 }
             },
-            "required": ["departure", "arrival", "distance"]
+            "required": [
+                "departure",
+                "departure_country",
+                "arrival",
+                "arrival_country",
+                "distance"
+            ]
         }
     }
 }
