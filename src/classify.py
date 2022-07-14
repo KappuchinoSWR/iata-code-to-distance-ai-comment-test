@@ -66,6 +66,4 @@ def classify_flight(
 
     distance = get_flight_distance(*flight)
 
-    return ClassifiedFlight(
-        departure=flight[0].code, arrival=flight[1].code, distance=distance
-    )
+    return ClassifiedFlight.from_flight(flight, distance)
