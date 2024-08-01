@@ -1,3 +1,7 @@
+# Note: This is an unofficial Fork for the code to tesk AI code commenting capabilites. Since this public code, the file(s) that are AI commented are public as well. 
+# Caution: The code has not been checked for any changes, corrections, omissions, etc. etc. 
+
+
 Calculate flight distance (using Vincenty's formulae) and classify flight in short/middle/long (according to [this classification](https://soep-online.de/wp-content/uploads/2022/05/VO-EG-Nr.-2612004.pdf)).
 
 # Install
